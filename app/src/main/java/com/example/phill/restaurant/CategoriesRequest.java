@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 public class CategoriesRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
-    private static CategoriesRequest instance;
+//    private static CategoriesRequest instance;
     private String url = "https://resto.mprog.nl/categories";
     private Callback activity;
 
@@ -36,8 +36,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     //    is called when something goes awr
     @Override
     public void onErrorResponse(VolleyError error) {
-//        VolleyLog.d("TAG", "Error: " + error.getMessage());
-        activity.gotCategoriesError("foutje");
+        activity.gotCategoriesError(error.getMessage());
     }
 
 
@@ -51,7 +50,6 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
                 // add catergorie to Arraylist
                 catergoriesview.add(Categoriesstring);
-
             }
 
         } catch (JSONException e) {
