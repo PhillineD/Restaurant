@@ -1,8 +1,7 @@
 package com.example.phill.restaurant;
 
 import android.content.Context;
-import android.icu.util.ULocale;
-import android.util.Log;
+import android.content.Intent;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -16,27 +15,29 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
-import javax.security.auth.callback.Callback;
-
 public class CategoriesRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private static CategoriesRequest instance;
     private String url = "https://resto.mprog.nl/categories";
+    private Callback activity;
 
     // create arraylist for the categories
-    ArrayList<CategoriesActivity> categories = new ArrayList<>();
+    ArrayList<String> catergoriesview = new ArrayList<>();
     private Context Context1;
 
     //    Write a constructor that accepts a Context type parameter
     CategoriesRequest(Context context) {
 //        super(context);
-        Context1 = context;
+        this.Context1 = context;
+//        this.activity = activity;
+
     }
 
     //    is called when something goes awr
     @Override
     public void onErrorResponse(VolleyError error) {
-        VolleyLog.d("TAG", "Error: " + error.getMessage());
+//        VolleyLog.d("TAG", "Error: " + error.getMessage());
+        activity.gotCategoriesError("foutje");
     }
 
 
@@ -46,11 +47,11 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         try {
             for(int i=0;i<response.length();i++){
                 JSONObject jresponse = response.getJSONObject(String.valueOf(i));
-                String CategoriesActivity = jresponse.getString(String.valueOf(i));
+                String Categoriesstring = jresponse.getString(String.valueOf(i));
 
-                // add catergorie to listview
-                CategoriesActivity catergorie = new CategoriesActivity(CategoriesActivity);
-                categories.add(catergorie);
+                // add catergorie to Arraylist
+                catergoriesview.add(Categoriesstring);
+
             }
 
         } catch (JSONException e) {
@@ -67,6 +68,9 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         // create a JsonObjectRequest
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
         queue.add(jsonObjectRequest);
+
+        // pass the arrylist back
+        activity.gotCategories(catergoriesview);
 
     }
 
