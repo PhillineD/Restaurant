@@ -22,7 +22,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     private Callback activity;
 
     // create arraylist for the categories
-    ArrayList<String> catergoriesview = new ArrayList<>();
+    ArrayList<String> catergoriesview = new ArrayList<String>();
     private Context Context1;
 
     //    Write a constructor that accepts a Context type parameter

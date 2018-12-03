@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public class CategoriesActivity extends AppCompatActivity  implements CategoriesRequest.Callback, AdapterView.OnItemClickListener{
+public abstract class CategoriesActivity extends AppCompatActivity  implements CategoriesRequest.Callback, AdapterView.OnItemClickListener{
 
 
     @Override
@@ -27,20 +27,30 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
         //    instantiate your adapter
         CategoriesRequest ArrayAdapter = new CategoriesRequest(this);
         ArrayAdapter.getCategories(this);
-
-        // attach the adapter to listview
 //        ListView listView = findViewById(R.id.CListView);
 //        listView.setAdapter((ListAdapter) ArrayAdapter);
 //        listView.setOnItemClickListener(new GridItemClickListener());
-
 
     }
 
     @Override
     public void  gotCategories(ArrayList<String> categories) {
-        // add catergorie to listview
-//            CategoriesActivity catergorie = new CategoriesActivity(String);
-//            categories.add(String.valueOf(catergorie));
+
+        // attach the adapter to listview
+        ListView CListview = findViewById(R.id.CListView);
+        ArrayAdapter<String> Categoriesadapter = new ArrayAdapter<String>(this, R.layout.categories_layout, categories);
+        CListview.setAdapter(Categoriesadapter);
+        CListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //  MenuActivity by way of an intent, making sure that you provide via putExtra a string with the category name
+                CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
+                Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
+                intent.putExtra("categorie", (Parcelable) categori);
+                startActivity(intent);
+            }
+        });
         Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
     }
 
@@ -49,13 +59,4 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
-    @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-//        MenuActivity by way of an intent, making sure that you provide via putExtra a string with the category name
-        CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
-        Intent intent = new Intent(this, MenuActivity.class);
-        intent.putExtra("categorie", (Parcelable) categori);
-        startActivity(intent);
-    }
 }

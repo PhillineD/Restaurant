@@ -15,7 +15,6 @@ import java.util.ArrayList;
 public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
 
 
-
     public MenuItemAdapter(Context context, int resource, ArrayList<MenuItem> objects) {
         super(context, resource,objects);
     }
@@ -40,12 +39,12 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
             holder = new viewholder();
 
             // create a new view:
-            convertView = inflater.inflate(R.layout.item_activity, parent, false);
+            convertView = inflater.inflate(R.layout.menu_layout, parent, false);
 
 
-            holder.image = (ImageView) convertView.findViewById();
-            holder.name = (TextView) convertView.findViewById();
-            holder.price = (TextView) convertView.findViewById();
+            holder.image = (ImageView) convertView.findViewById(R.id.MenuImage);
+            holder.name = (TextView) convertView.findViewById(R.id.MenuName);
+            holder.price = (TextView) convertView.findViewById(R.id.MenuPrice);
 
             convertView.setTag(holder);
         }
@@ -55,11 +54,9 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
         viewholder.name.setText(piece.getName());
         viewholder.price.setText(piece.getPrice());
 
-
         //or an image on an ImageView.
         DownloadImageTask UrltoImage = new DownloadImageTask(viewholder.image);
         UrltoImage.execute(piece.getImage());
-
 
         return convertView;
     }

@@ -5,23 +5,22 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import org.w3c.dom.Text;
 
 public class MenuItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.menu_activity);
+        setContentView(R.layout.item_activity);
 
         // get intent
         Intent items = getIntent();
 
         // declared views
-        TextView viewname = findViewById();
-        TextView viewdescription = findViewById();
-        TextView viewprice = findViewById();
-        ImageView viewimage = findViewById();
+        TextView viewname = findViewById(R.id.ItemName);
+        TextView viewdescription = findViewById(R.id.ItemDescription);
+        TextView viewprice = findViewById(R.id.ItemPrice);
+        ImageView viewimage = findViewById(R.id.ItemImage);
 
         // get specifiek parts from intent
         String name = items.getStringExtra("name");
@@ -37,7 +36,7 @@ public class MenuItemActivity extends AppCompatActivity {
         // set image
         DownloadImageTask load = new DownloadImageTask(viewimage);
         load.execute(image);
-        
+
     }
 
 }

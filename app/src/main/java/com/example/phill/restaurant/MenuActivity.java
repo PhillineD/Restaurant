@@ -49,7 +49,7 @@ public class MenuActivity extends AppCompatActivity implements MenuItemRequest.C
 //        custom view for the adapter, which will display as much info about the menu items as possible, including a picture!
        // moet nog een adapter komen voor de items
         MenuItemAdapter adapter = new MenuItemAdapter(this, R.layout.item_activity, categories );
-        ListView listView = findViewById();
+        ListView listView = findViewById(R.id.MenuListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
