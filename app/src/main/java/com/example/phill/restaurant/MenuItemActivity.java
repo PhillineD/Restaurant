@@ -23,16 +23,22 @@ public class MenuItemActivity extends AppCompatActivity {
         TextView viewprice = findViewById();
         ImageView viewimage = findViewById();
 
+        // get specifiek parts from intent
         String name = items.getStringExtra("name");
         String price = items.getStringExtra("price");
         String description = items.getStringExtra("description");
+        String image = items.getStringExtra("image");
 
-
+        // set text for name price and description
         viewname.setText(name);
         viewprice.setText(price);
         viewdescription.setText(description);
 
-        // image moet nog
+        // set image
+        DownloadImageTask load = new DownloadImageTask(viewimage);
+        load.execute(image);
 
+        // image moet nog
+    }
 
 }

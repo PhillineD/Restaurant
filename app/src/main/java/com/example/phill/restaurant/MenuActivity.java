@@ -65,7 +65,6 @@ public class MenuActivity extends AppCompatActivity implements MenuItemRequest.C
                 startActivity(item);
             }
         });
-
     }
 
     @Override
