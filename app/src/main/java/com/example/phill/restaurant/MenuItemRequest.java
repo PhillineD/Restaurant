@@ -38,8 +38,6 @@ public class MenuItemRequest implements Response.Listener<JSONObject>, Response.
     public void onResponse(JSONObject response) {
         try {
             for(int i=0;i<response.length();i++){
-
-
                 JSONObject menuitem = response.getJSONObject(String.valueOf(i));
                int price = menuitem.getInt("price");
                String name = menuitem.getString("name");
