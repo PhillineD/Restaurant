@@ -4,7 +4,6 @@ package com.example.phill.restaurant;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.menu.MenuAdapter;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
@@ -14,7 +13,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 //In your MenuActivity’s onCreate, retrieve the category string and make sure that this string is part of the request for menu items.
-public class MenuActivity extends AppCompatActivity implements MenuRequest.Callback{
+public class MenuActivity extends AppCompatActivity implements MenuItemRequest.Callback{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,7 +25,7 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
         String message = intent.getStringExtra("categorie");
 
         // get the menu
-        MenuRequest request = new MenuRequest(this);
+        MenuItemRequest request = new MenuItemRequest(this);
         request.getMenu(this);
 
         // Capture the layout's TextView and set the string as its text

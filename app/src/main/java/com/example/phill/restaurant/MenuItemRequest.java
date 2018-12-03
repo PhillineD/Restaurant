@@ -15,14 +15,14 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 
 //will retrieve the menu items for this category
-public class MenuRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
+public class MenuItemRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     private Context Context2 ;
     private String url = "https://resto.mprog.nl/menu";
     private Callback activity;
     ArrayList<com.example.phill.restaurant.MenuItem> MenuItem = new ArrayList<com.example.phill.restaurant.MenuItem>();
 
-    MenuRequest(Context context) {
+    MenuItemRequest(Context context) {
 //        super(context);
         this.Context2 = context;
 //        this.activity = activity;
