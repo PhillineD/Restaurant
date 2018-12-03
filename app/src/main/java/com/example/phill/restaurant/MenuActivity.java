@@ -30,8 +30,8 @@ public class MenuActivity extends AppCompatActivity implements MenuItemRequest.C
         request.getMenu(this);
 
         // Capture the layout's TextView and set the string as its text
-        TextView textView = findViewById(R.id.textView);
-        textView.setText(message);
+//        TextView textView = findViewById(R.id.textView);
+//        textView.setText(message);
     }
 
     @Override

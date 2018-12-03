@@ -37,8 +37,7 @@ public class MenuItemActivity extends AppCompatActivity {
         // set image
         DownloadImageTask load = new DownloadImageTask(viewimage);
         load.execute(image);
-
-        // image moet nog
+        
     }
 
 }
