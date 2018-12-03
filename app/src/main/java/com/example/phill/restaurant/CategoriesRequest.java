@@ -27,16 +27,13 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
     //    Write a constructor that accepts a Context type parameter
     CategoriesRequest(Context context) {
-//        super(context);
         this.Context1 = context;
-//        this.activity = activity;
-
     }
 
     //    is called when something goes awr
     @Override
     public void onErrorResponse(VolleyError error) {
-        activity.gotCategoriesError(error.getMessage());
+        this.activity.gotCategoriesError(error.getMessage());
     }
 
 
@@ -55,6 +52,8 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        // pass the arrylist back
+        activity.gotCategories(catergoriesview);
     }
 
     //    attempt to retrieve the categories from the API
@@ -69,7 +68,6 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
 
         // pass the arrylist back
         activity.gotCategories(catergoriesview);
-
     }
 
     public interface Callback {

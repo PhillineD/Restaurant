@@ -37,7 +37,7 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
     @Override
     public void gotMenu(ArrayList<MenuItem> categories) {
 //        custom view for the adapter, which will display as much info about the menu items as possible, including a picture!
-        MenuAdapter adapter = new MenuAdapter(this,R.layout.categories_activity, categories);
+       // moet nog een adapter komen voor de items
         ListView listView = findViewById();
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {

@@ -20,7 +20,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
     private Context Context2 ;
     private String url = "https://resto.mprog.nl/menu";
     private Callback activity;
-    ArrayList<String> MenuItem = new ArrayList<String>();
+    ArrayList<com.example.phill.restaurant.MenuItem> MenuItem = new ArrayList<com.example.phill.restaurant.MenuItem>();
 
     MenuRequest(Context context) {
 //        super(context);
@@ -38,16 +38,26 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
     public void onResponse(JSONObject response) {
         try {
             for(int i=0;i<response.length();i++){
-                JSONObject jresponse = response.getJSONObject(String.valueOf(i));
-                String menui = jresponse.getString(String.valueOf(i));
 
-                // add catergorie to Arraylist
+
+                JSONObject menuitem = response.getJSONObject(String.valueOf(i));
+               int price = menuitem.getInt("price");
+               String name = menuitem.getString("name");
+               String description = menuitem.getString("description");
+               String image = menuitem.getString("image");
+               String catergory = menuitem.getString("catergory");
+
+                MenuItem menui = new MenuItem(name, description, price, catergory, image);
+
+                // add menu to Arraylist
                 MenuItem.add(menui);
             }
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        // pass the arrylist back
+        activity.gotMenu(MenuItem);
 
     }
 
@@ -61,13 +71,10 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
         queue.add(jsonObjectRequest);
 
-        // pass the arrylist back
-        activity.gotMenu(MenuItem);
-
     }
 
     public interface Callback {
-        void gotMenu(ArrayList<String> categories);
+        void gotMenu(ArrayList<com.example.phill.restaurant.MenuItem> categories);
         void gotMenuError(String message);
     }
 

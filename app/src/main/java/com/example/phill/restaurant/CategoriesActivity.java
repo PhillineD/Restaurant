@@ -26,10 +26,11 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
 
         //    instantiate your adapter
         CategoriesRequest ArrayAdapter = new CategoriesRequest(this);
+        ArrayAdapter.getCategories(this);
 
         // attach the adapter to listview
-        ListView listView = findViewById(R.id.CListView);
-        listView.setAdapter((ListAdapter) ArrayAdapter);
+//        ListView listView = findViewById(R.id.CListView);
+//        listView.setAdapter((ListAdapter) ArrayAdapter);
 //        listView.setOnItemClickListener(new GridItemClickListener());
 
 
