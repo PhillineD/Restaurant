@@ -51,6 +51,8 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
 
         // changes to the convertView, such as set a text on a TextView
         MenuItem piece = getItem(position);
+
+        // from piece from menu, get name & price en set views
         viewholder.name.setText(piece.getName());
         viewholder.price.setText(piece.getPrice());
 

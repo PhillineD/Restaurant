@@ -21,8 +21,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     private String url = "https://resto.mprog.nl/categories";
     private Callback activity;
 
-    // create arraylist for the categories
-    ArrayList<String> catergoriesview = new ArrayList<String>();
+
     private Context Context1;
 
     //    Write a constructor that accepts a Context type parameter
@@ -40,6 +39,8 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     //    is called when everything goes as expected
     @Override
     public void onResponse(JSONObject response) {
+        // create arraylist for the categories
+        ArrayList<String> catergoriesview = new ArrayList<String>();
         try {
             for(int i=0;i<response.length();i++){
                 JSONObject jresponse = response.getJSONObject(String.valueOf(i));
@@ -52,7 +53,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        // pass the arrylist back
+        // pass the arraylist back
         activity.gotCategories(catergoriesview);
     }
 
@@ -67,7 +68,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         queue.add(jsonObjectRequest);
 
         // pass the arrylist back
-        activity.gotCategories(catergoriesview);
+//        activity.gotCategories(catergoriesview);
     }
 
     public interface Callback {

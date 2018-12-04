@@ -2,6 +2,7 @@ package com.example.phill.restaurant;
 
 
 import android.content.Context;
+import android.view.Menu;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -20,7 +21,7 @@ public class MenuItemRequest implements Response.Listener<JSONObject>, Response.
     private Context Context2 ;
     private String url = "https://resto.mprog.nl/menu";
     private Callback activity;
-    ArrayList<com.example.phill.restaurant.MenuItem> MenuItem = new ArrayList<com.example.phill.restaurant.MenuItem>();
+//    ArrayList<com.example.phill.restaurant.MenuItem> MenuItem = new ArrayList<com.example.phill.restaurant.MenuItem>();
 
     MenuItemRequest(Context context) {
 //        super(context);
@@ -36,6 +37,7 @@ public class MenuItemRequest implements Response.Listener<JSONObject>, Response.
 
     @Override
     public void onResponse(JSONObject response) {
+        ArrayList<MenuItem> MenuItem = new ArrayList<MenuItem>();
         try {
             for(int i=0;i<response.length();i++){
                 JSONObject menuitem = response.getJSONObject(String.valueOf(i));

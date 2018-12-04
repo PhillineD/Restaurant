@@ -13,7 +13,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
-public abstract class CategoriesActivity extends AppCompatActivity  implements CategoriesRequest.Callback, AdapterView.OnItemClickListener{
+public class CategoriesActivity extends AppCompatActivity  implements CategoriesRequest.Callback {
 
 
     @Override
@@ -27,9 +27,6 @@ public abstract class CategoriesActivity extends AppCompatActivity  implements C
         //    instantiate your adapter
         CategoriesRequest ArrayAdapter = new CategoriesRequest(this);
         ArrayAdapter.getCategories(this);
-//        ListView listView = findViewById(R.id.CListView);
-//        listView.setAdapter((ListAdapter) ArrayAdapter);
-//        listView.setOnItemClickListener(new GridItemClickListener());
 
     }
 
@@ -44,6 +41,7 @@ public abstract class CategoriesActivity extends AppCompatActivity  implements C
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
                 //  MenuActivity by way of an intent, making sure that you provide via putExtra a string with the category name
                 CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
@@ -54,6 +52,7 @@ public abstract class CategoriesActivity extends AppCompatActivity  implements C
         Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
     }
 
+    // when error if load catergories failed
     @Override
     public void gotCategoriesError(String message) {
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
