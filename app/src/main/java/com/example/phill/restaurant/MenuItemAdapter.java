@@ -33,9 +33,6 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
             //  get the View object which you define in a layout
             LayoutInflater inflater = LayoutInflater.from(getContext());
 
-//            // create new holder
-//             viewholder holder = new viewholder();
-
             // create a new view:
             convertView = inflater.inflate(R.layout.menu_layout, parent, false);
         }
@@ -50,7 +47,7 @@ public class MenuItemAdapter extends ArrayAdapter<MenuItem> {
         Log.d("MenuItemAdapter", "Piece = " + piece.getName());
         // from piece from menu, get name & price en set views
         name.setText(piece.getName());
-        price.setText(String.valueOf(piece.getPrice()));
+        price.setText("$" + String.valueOf(piece.getPrice()));
 
         //or an image on an ImageView.
         DownloadImageTask UrltoImage = new DownloadImageTask(image);

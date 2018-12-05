@@ -43,13 +43,12 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
         try {
 
             JSONArray items = response.getJSONArray("items");
-            Log.d("MenuRequest1", "onResponse" + items);
             for(int i=0;i< items.length();i++){
 
+                // get menuitems from JSONARRAY
                 JSONObject menuitem = items.getJSONObject(i);
 
-                Log.d("MenuRequet4", "Item: " + menuitem);
-
+                // get price, name, discription and cayergory
                int price = menuitem.getInt("price");
                String name = menuitem.getString("name");
                String description = menuitem.getString("description");
@@ -64,12 +63,9 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
 
             // pass the arrylist back
             activity.gotMenu(MenuItem);
-            Log.d("MenuRequest2", "onResponse");
 
         } catch (JSONException e) {
             e.printStackTrace();
-            Log.d("MenuRequest3", "onResponse");
-
         }
 
 
@@ -78,6 +74,7 @@ public class MenuRequest implements Response.Listener<JSONObject>, Response.Erro
     //    attempt to retrieve the categories from the API
     public void getMenu(Callback activity, String message){
         this.activity = activity;
+
         // use Volley to create a new RequestQueue
         RequestQueue queue = Volley.newRequestQueue(Context2);
 

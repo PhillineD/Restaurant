@@ -11,7 +11,6 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -48,7 +47,7 @@ public class MenuActivity extends AppCompatActivity implements MenuRequest.Callb
                 // items doorgeven
                 Intent item = new Intent(getApplicationContext(),MenuItemActivity.class);
                 item.putExtra("name", ChooseItems.getName());
-                item.putExtra("price", ChooseItems.getPrice());
+                item.putExtra("price", String.valueOf(ChooseItems.getPrice()));
                 item.putExtra("description", ChooseItems.getDescription());
                 item.putExtra("image", ChooseItems.getImage());
 

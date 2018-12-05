@@ -30,7 +30,7 @@ public class MenuItemActivity extends AppCompatActivity {
 
         // set text for name price and description
         viewname.setText(name);
-        viewprice.setText(price);
+        viewprice.setText("$"+ String.valueOf(price));
         viewdescription.setText(description);
 
         // set image

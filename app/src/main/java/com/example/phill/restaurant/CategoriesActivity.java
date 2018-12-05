@@ -19,33 +19,32 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
-//        CategoriesRequest x = new CategoriesRequest(this);
-//        x.getCategories(this);
-
 
         //  instantiate your adapter
         CategoriesRequest ArrayAdapter = new CategoriesRequest(this);
         ArrayAdapter.getCategories(this);
 
+        // Toast for test
         Toast.makeText(this, "started", Toast.LENGTH_SHORT).show();
-
     }
 
     @Override
     public void gotCategories(ArrayList<String> categories) {
+
+        // Toast for test
         Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
 
-//         attach the adapter to listview
+        // attach the adapter to listview
         ArrayAdapter<String> Categoriesadapter = new ArrayAdapter<String>(this, R.layout.categories_layout, categories);
         ListView CListview = findViewById(R.id.CListView);
         CListview.setAdapter(Categoriesadapter);
         CListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
+            // when clicked on categorie
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-                //  MenuActivity by way of an intent, making sure that you provide via putExtra a string with the category name
-//                CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
+                // Create intent en put choosen categorie in it
                 String categori = (String) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
                 intent.putExtra("categorie", categori);
@@ -58,6 +57,8 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
     // when error if load catergories failed
     @Override
     public void gotCategoriesError(String message) {
+
+        // Toast to test
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 
