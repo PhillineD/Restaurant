@@ -7,15 +7,18 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.view.menu.MenuAdapter;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 //In your MenuActivity’s onCreate, retrieve the category string and make sure that this string is part of the request for menu items.
-public class MenuActivity extends AppCompatActivity implements MenuItemRequest.Callback{
+public class MenuActivity extends AppCompatActivity implements MenuRequest.Callback{
 
+    String message;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,29 +29,14 @@ public class MenuActivity extends AppCompatActivity implements MenuItemRequest.C
         String message = intent.getStringExtra("categorie");
 
         // get the menu
-        MenuItemRequest request = new MenuItemRequest(this);
-        request.getMenu(this);
-
-        // Capture the layout's TextView and set the string as its text
-//        TextView textView = findViewById(R.id.textView);
-//        textView.setText(message);
+        MenuRequest request = new MenuRequest(this);
+        request.getMenu(this, message);
     }
 
     @Override
-    public void gotMenu(ArrayList<MenuItem> categories) {
+    public void gotMenu(ArrayList<MenuItem> menuItems) {
 
-        Intent intent = getIntent();
-        String message = intent.getStringExtra("categorie");
-
-        // Search for right category the right menu
-        for (int i = 0; i< categories.size(); i++){
-            if (categories.get(i).getCategory().equals(message)){
-                MenuItem item = categories.get(i);
-            }
-        }
-//        custom view for the adapter, which will display as much info about the menu items as possible, including a picture!
-       // moet nog een adapter komen voor de items
-        MenuItemAdapter adapter = new MenuItemAdapter(this, R.layout.item_activity, categories );
+        MenuItemAdapter adapter = new MenuItemAdapter(this, R.layout.menu_layout, menuItems );
         ListView listView = findViewById(R.id.MenuListView);
         listView.setAdapter(adapter);
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -56,6 +44,8 @@ public class MenuActivity extends AppCompatActivity implements MenuItemRequest.C
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 MenuItem ChooseItems = (MenuItem) parent.getItemAtPosition(position);
+
+                // items doorgeven
                 Intent item = new Intent(getApplicationContext(),MenuItemActivity.class);
                 item.putExtra("name", ChooseItems.getName());
                 item.putExtra("price", ChooseItems.getPrice());

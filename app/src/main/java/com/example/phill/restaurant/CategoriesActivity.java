@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,22 +19,25 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.categories_activity);
-        CategoriesRequest x = new CategoriesRequest(this);
-        x.getCategories(this);
-        Toast.makeText(this, "started", Toast.LENGTH_SHORT).show();
+//        CategoriesRequest x = new CategoriesRequest(this);
+//        x.getCategories(this);
 
-        //    instantiate your adapter
+
+        //  instantiate your adapter
         CategoriesRequest ArrayAdapter = new CategoriesRequest(this);
         ArrayAdapter.getCategories(this);
+
+        Toast.makeText(this, "started", Toast.LENGTH_SHORT).show();
 
     }
 
     @Override
-    public void  gotCategories(ArrayList<String> categories) {
+    public void gotCategories(ArrayList<String> categories) {
+        Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
 
-        // attach the adapter to listview
-        ListView CListview = findViewById(R.id.CListView);
+//         attach the adapter to listview
         ArrayAdapter<String> Categoriesadapter = new ArrayAdapter<String>(this, R.layout.categories_layout, categories);
+        ListView CListview = findViewById(R.id.CListView);
         CListview.setAdapter(Categoriesadapter);
         CListview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -43,13 +45,14 @@ public class CategoriesActivity extends AppCompatActivity  implements Categories
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
                 //  MenuActivity by way of an intent, making sure that you provide via putExtra a string with the category name
-                CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
+//                CategoriesRequest categori = (CategoriesRequest) parent.getItemAtPosition(position);
+                String categori = (String) parent.getItemAtPosition(position);
                 Intent intent = new Intent(getApplicationContext(), MenuActivity.class);
-                intent.putExtra("categorie", (Parcelable) categori);
+                intent.putExtra("categorie", categori);
                 startActivity(intent);
             }
         });
-        Toast.makeText(this, categories.get(0), Toast.LENGTH_LONG).show();
+
     }
 
     // when error if load catergories failed

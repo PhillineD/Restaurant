@@ -1,15 +1,15 @@
 package com.example.phill.restaurant;
 
 import android.content.Context;
-import android.content.Intent;
+import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -18,15 +18,34 @@ import java.util.ArrayList;
 public class CategoriesRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
 //    private static CategoriesRequest instance;
-    private String url = "https://resto.mprog.nl/categories";
+//    private String url = "https://resto.mprog.nl/categories";
     private Callback activity;
-
-
     private Context Context1;
 
     //    Write a constructor that accepts a Context type parameter
-    CategoriesRequest(Context context) {
+    // We need access to a “context” object to send internet requests.
+    public CategoriesRequest(Context context) {
         this.Context1 = context;
+    }
+
+    public interface Callback {
+        void gotCategories(ArrayList<String> categories);
+        void gotCategoriesError(String message);
+    }
+
+    //    attempt to retrieve the categories from the API
+    public void getCategories(Callback activity){
+        this.activity = activity;
+        // use Volley to create a new RequestQueue
+        RequestQueue queue = Volley.newRequestQueue(this.Context1);
+
+        // create a JsonObjectRequest
+        String url = "https://resto.mprog.nl/categories";
+        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
+        queue.add(jsonObjectRequest);
+
+        // pass the arrylist back
+//        activity.gotCategories(catergoriesview);
     }
 
     //    is called when something goes awr
@@ -42,37 +61,30 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         // create arraylist for the categories
         ArrayList<String> catergoriesview = new ArrayList<String>();
         try {
-            for(int i=0;i<response.length();i++){
-                JSONObject jresponse = response.getJSONObject(String.valueOf(i));
-                String Categoriesstring = jresponse.getString(String.valueOf(i));
+
+//            we’d like to extract the array named "categories"
+            JSONArray categories = response.getJSONArray("categories");
+
+//            loop over it to extract the strings that are in it
+            for(int i=0;i<categories.length();i++){
+
+//                JSONObject jresponse = response.getJSONObject("categories");
+                String Categoriesstring = categories.getString(i);
 
                 // add catergorie to Arraylist
                 catergoriesview.add(Categoriesstring);
+                Log.d("foutje", "onResponse: ");
             }
+
+            // pass the arraylist back
+            this.activity.gotCategories(catergoriesview);
 
         } catch (JSONException e) {
             e.printStackTrace();
         }
-        // pass the arraylist back
-        activity.gotCategories(catergoriesview);
     }
 
-    //    attempt to retrieve the categories from the API
-    public void getCategories(Callback activity){
 
-        // use Volley to create a new RequestQueue
-        RequestQueue queue = Volley.newRequestQueue(Context1);
 
-        // create a JsonObjectRequest
-        JsonObjectRequest jsonObjectRequest = new JsonObjectRequest(url, null, this, this);
-        queue.add(jsonObjectRequest);
 
-        // pass the arrylist back
-//        activity.gotCategories(catergoriesview);
-    }
-
-    public interface Callback {
-        void gotCategories(ArrayList<String> categories);
-        void gotCategoriesError(String message);
-    }
 }

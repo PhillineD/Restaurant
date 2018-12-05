@@ -11,7 +11,7 @@ public class MenuItemActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.item_activity);
+        setContentView(R.layout.item_layout);
 
         // get intent
         Intent items = getIntent();
