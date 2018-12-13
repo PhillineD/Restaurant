@@ -1,6 +1,8 @@
 # Restaurant
 
  Help users look at a restaurant’s menu and view the details of the items in the menu. 
+ 
+ 
  Philline Dikker Restaurant 12317608
  
  Class DownloadImageTask from: https://medium.com/@crossphd/android-image-loading-from-a-string-url-6c8290b82c5e.
