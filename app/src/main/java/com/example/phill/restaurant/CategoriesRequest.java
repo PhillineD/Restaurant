@@ -20,8 +20,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     private Callback activity;
     private Context Context1;
 
-    // Constructor that accepts a Context type parameter
-    // We need access to a “context” object to send internet requests.
+    //   constructor that accepts a Context type parameter
     public CategoriesRequest(Context context) {
         this.Context1 = context;
     }
@@ -34,7 +33,6 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
     //    attempt to retrieve the categories from the API
     public void getCategories(Callback activity){
         this.activity = activity;
-
         // use Volley to create a new RequestQueue
         RequestQueue queue = Volley.newRequestQueue(this.Context1);
 
@@ -44,7 +42,7 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         queue.add(jsonObjectRequest);
     }
 
-    //    is called when cannot get catergories
+    //    is called when something goes wrong
     @Override
     public void onErrorResponse(VolleyError error) {
         this.activity.gotCategoriesError(error.getMessage());
@@ -59,17 +57,18 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
         ArrayList<String> catergoriesview = new ArrayList<String>();
         try {
 
-            //  we’d like to extract the array named "categories"
+//            we’d like to extract the array named "categories"
             JSONArray categories = response.getJSONArray("categories");
 
-            //   loop over it to extract the strings that are in it
+//            loop over it to extract the strings that are in it
             for(int i=0;i<categories.length();i++){
 
-                // save the catories in string
+//                JSONObject jresponse = response.getJSONObject("categories");
                 String Categoriesstring = categories.getString(i);
 
                 // add catergorie to Arraylist
                 catergoriesview.add(Categoriesstring);
+                Log.d("foutje", "onResponse: ");
             }
 
             // pass the arraylist back
@@ -79,5 +78,8 @@ public class CategoriesRequest implements Response.Listener<JSONObject>, Respons
             e.printStackTrace();
         }
     }
+
+
+
 
 }

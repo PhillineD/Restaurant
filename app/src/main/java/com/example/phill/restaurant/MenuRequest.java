@@ -21,15 +21,11 @@ import java.util.ArrayList;
 public class MenuRequest implements Response.Listener<JSONObject>, Response.ErrorListener {
 
     Context Context2 ;
-//    private String url = "https://resto.mprog.nl/menu";
     Callback activity;
-//    ArrayList<com.example.phill.restaurant.MenuItem> MenuItem = new ArrayList<com.example.phill.restaurant.MenuItem>();
 
+    // constructor
     MenuRequest(Context context) {
-//        super(context);
         this.Context2 = context;
-//        this.activity = activity;
-
     }
 
     @Override
